@@ -1,9 +1,32 @@
-SAR_Generator
+## SAR_Generator
+## Getting Started
+1. Clone the repository from GitHub:
 
-1. create postgress database  and name it SAR_Generator
+```bash
+git clone https://github.com/parthakadam2007/SAR-Generator
+```
+
+2. Navigate to the project's root directory:
+
+```bash
+cd SAR-Generator
+```
+3. Install dependencies & Run app:
+```
+cd client
+npm install
+npm run dev
+```
+4. Set up environment variables:
+SAR-Generator\backend\python_ai
+```
+create .env
+```
+
+5. create postgress database  and name it SAR_Generator
 
 
-2. go to backend/main_service/main/java/com/SAR_Generator/resources/application.properties
+6. go to backend/main_service/main/java/com/SAR_Generator/resources/application.properties
 ```
 spring.application.name=main_service
 # PostgreSQL database configuration
@@ -21,8 +44,7 @@ spring.session.jdbc.initialize-schema=always
 
 ```
 
-
-3. start all service 
+7. start all service 
 ```
 docker compose -f infra/docker/docker-compose.dev.yml up
 ```
@@ -147,3 +169,29 @@ SAR-GENERATOR/
 
 
 ```
+## Contributing
+
+Happy to have you contribute! Please follow these steps:
+
+1. Fork the repository
+2. Create a new branch for your feature or bugfix:
+
+```bash
+git checkout -b feature/my-new-feature
+```
+3. Make your changes and commit them:
+
+```bash
+git add .
+git commit -m "Add my new feature"
+```
+4. Push your branch to your fork:
+
+```bash
+git push origin feature/my-new-feature
+```
+5. Open a pull request against the main repository.
+
+## Contact
+
+[Parth Kadam](https://github.com/parthakadam2007/SAR-Generator)
