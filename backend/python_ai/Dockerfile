@@ -1,17 +1,22 @@
-FROM python:3.11
+# syntax=docker/dockerfile:1.5
 
+FROM python:3.11-slim
 
 WORKDIR /code
 
-COPY ./requirements.txt /code/requirements.txt
+# Copy only requirements first (for cache)
+COPY requirements.txt .
 
-RUN pip install --upgrade pip
+# Install deps with cache + retry + timeout
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install --upgrade pip && \
+    pip install --timeout=100 --retries=5 -r requirements.txt
 
-RUN pip install -r /code/requirements.txt
+# Copy app later
+COPY . /code/app
 
-# Expose port
+ENV PYTHONPATH=/code/app
+
 EXPOSE 8000
 
-COPY ./ /code/app
-ENV PYTHONPATH=/code/app
 CMD ["fastapi", "dev", "/code/app/main.py", "--host", "0.0.0.0", "--port", "8000"]

@@ -1,12 +1,34 @@
 from fastapi import FastAPI
 from routes import health
 from routes import riskscore_route
+from contextlib import asynccontextmanager
+
+import threading
+
+
+from services.kafka_consumer import start_consumer
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+
+    thread = threading.Thread(
+        target=start_consumer,
+        daemon=True
+    )
+    thread.start()
+
+    yield   # App runs here
+
+
+    print("App shutting down...")
+
 
 app = FastAPI(
-    # title="python-ai",
-    # version="1.0.0",
-    # description="python-ai Boilerplate"
+
+    lifespan=lifespan
 )
+
 
 
 # Routes
